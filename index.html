@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="eval.js"></script>
+</head>
+
+<body>
+    <form onsubmit="handleOnSubmit()">
+        <input name="expression" type="text" required placeholder="Enter an expression" />
+        <button>Submit</button>
+    </form>
+    <div>
+        <p id="output"></p>
+    </div>
+</body>
+<script>
+    function handleOnSubmit() {
+        event.preventDefault();
+        const form = event.target;
+        const expression = form.expression.value;
+        const output = document.getElementById('output');
+        output.textContent = evaluateExpression(expression);
+    }
+</script>
+
+</html>
