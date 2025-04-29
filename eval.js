@@ -11,7 +11,7 @@ console.log("Results: ", result)
  * @returns {number} The result of the evaluated expression.
  */
 
-export function evaluateExpression(input) {
+function evaluateExpression(input) {
     const validNumbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
     const numbers = []
     const operators = []
@@ -29,7 +29,7 @@ export function evaluateExpression(input) {
             const finalResults = evaluateExpression(result)
 
             numbers.push(finalResults)
-            i = endOfSubExpression -1
+            i = endOfSubExpression - 1
 
             if (multiplicationWithNextValueWhenStarNotPresent(validNumbers, input, endOfSubExpression)) operators.push('*');
 
@@ -80,13 +80,13 @@ function handleMultiplicationAndDivision(numbers, operators) {
             // Use parseFloat instead of parseInt to handle decimal numbers
             const num1 = parseFloat(numbers[i]);
             const num2 = parseFloat(numbers[i + 1]);
-            
+
             if (operators[i] === "*") {
                 numbers[i + 1] = num1 * num2;
             } else if (operators[i] === "/" && num2 !== 0) {
                 numbers[i + 1] = num1 / num2;
             }
-            
+
             // Remove the used number and operator
             numbers.splice(i, 1);
             operators.splice(i, 1);
@@ -95,18 +95,18 @@ function handleMultiplicationAndDivision(numbers, operators) {
     }
 }
 
-function handleAdditionAndSubtraction(numbers, operators) {    
+function handleAdditionAndSubtraction(numbers, operators) {
     for (let i = 0; i < operators.length; i++) {
         if (operators[i] === "+" || operators[i] === "-") {
             const num1 = parseFloat(numbers[i]);
             const num2 = parseFloat(numbers[i + 1]);
-            
+
             if (operators[i] === "+") {
                 numbers[i + 1] = num1 + num2;
             } else if (operators[i] === "-") {
                 numbers[i + 1] = num1 - num2;
             }
-            
+
             // Remove the used number and operator
             numbers.splice(i, 1);
             operators.splice(i, 1);
