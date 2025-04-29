@@ -1,7 +1,7 @@
-// Example usage:
-const input = "1+2(2+3)"
-const result = evaluateExpression(input)
-console.log("Results: ", result)
+// // Example usage:
+// const input = "1+2(2+3)"
+// const result = evaluateExpression(input)
+// console.log("Results: ", result)
 
 
 /**
