@@ -1,5 +1,5 @@
 // Example usage:
-const input = " 2 +2 (2)"
+const input = "1+2(2+3)"
 const result = evaluateExpression(input)
 console.log("Results: ", result)
 
@@ -58,6 +58,9 @@ export function evaluateExpression(input) {
 
     // Handle addition and subtraction after multiplication and division
     handleAdditionAndSubtraction(numbers, operators);
+
+    console.log(numbers)
+    console.log(operators)
 
     return numbers[0];
 }
