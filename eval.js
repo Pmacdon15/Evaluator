@@ -29,7 +29,7 @@ export function evaluateExpression(input) {
             const finalResults = evaluateExpression(result)
 
             numbers.push(finalResults)
-            i = endOfSubExpression
+            i = endOfSubExpression -1
 
             if (multiplicationWithNextValueWhenStarNotPresent(validNumbers, input, endOfSubExpression)) operators.push('*');
 
@@ -41,7 +41,7 @@ export function evaluateExpression(input) {
             while (validNumbers.includes(input[endOfSubExpression])) endOfSubExpression++
 
             result = input.substring((i), endOfSubExpression);
-            i = endOfSubExpression 
+            i = endOfSubExpression - 1
 
             if (multiplicationWithNextValueWhenStarNotPresent(validNumbers, input, endOfSubExpression)) operators.push('*');
 
@@ -59,8 +59,6 @@ export function evaluateExpression(input) {
     // Handle addition and subtraction after multiplication and division
     handleAdditionAndSubtraction(numbers, operators);
 
-    console.log(numbers)
-    console.log(operators)
 
     return numbers[0];
 }
