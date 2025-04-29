@@ -1,5 +1,5 @@
 // Example usage:
-const input = "2(1 2)2(2 3)+1"
+const input = " 2 +2 (2)"
 const result = evaluateExpression(input)
 console.log("Results: ", result)
 
@@ -11,7 +11,7 @@ console.log("Results: ", result)
  * @returns {number} The result of the evaluated expression.
  */
 
-function evaluateExpression(input) {
+export function evaluateExpression(input) {
     const validNumbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
     const numbers = []
     const operators = []
@@ -76,11 +76,16 @@ function multiplicationWithNextValueWhenStarNotPresent(validNumbers, input, endO
 function handleMultiplicationAndDivision(numbers, operators) {
     for (let i = 0; i < operators.length; i++) {
         if (operators[i] === "*" || operators[i] === "/") {
+            // Use parseFloat instead of parseInt to handle decimal numbers
+            const num1 = parseFloat(numbers[i]);
+            const num2 = parseFloat(numbers[i + 1]);
+            
             if (operators[i] === "*") {
-                numbers[i + 1] = parseInt(numbers[i]) * parseInt(numbers[i + 1]);
-            } else if (operators[i] === "/") {
-                numbers[i + 1] = parseInt(numbers[i]) / parseInt(numbers[i + 1]);
+                numbers[i + 1] = num1 * num2;
+            } else if (operators[i] === "/" && num2 !== 0) {
+                numbers[i + 1] = num1 / num2;
             }
+            
             // Remove the used number and operator
             numbers.splice(i, 1);
             operators.splice(i, 1);
@@ -91,14 +96,20 @@ function handleMultiplicationAndDivision(numbers, operators) {
 
 function handleAdditionAndSubtraction(numbers, operators) {    
     for (let i = 0; i < operators.length; i++) {
-        if (operators[i] === "+") {
-            numbers[i + 1] = parseInt(numbers[i]) + parseInt(numbers[i + 1]);
-        } else if (operators[i] === "-") {
-            numbers[i + 1] = parseInt(numbers[i]) - parseInt(numbers[i + 1]);
+        if (operators[i] === "+" || operators[i] === "-") {
+            const num1 = parseFloat(numbers[i]);
+            const num2 = parseFloat(numbers[i + 1]);
+            
+            if (operators[i] === "+") {
+                numbers[i + 1] = num1 + num2;
+            } else if (operators[i] === "-") {
+                numbers[i + 1] = num1 - num2;
+            }
+            
+            // Remove the used number and operator
+            numbers.splice(i, 1);
+            operators.splice(i, 1);
+            i--; // Adjust index since we removed elements
         }
-        // Remove the used number and operator
-        numbers.splice(i, 1);
-        operators.splice(i, 1);
-        i--; // Adjust index since we removed elements
     }
 }
